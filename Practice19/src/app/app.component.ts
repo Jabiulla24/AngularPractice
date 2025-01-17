@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   title = 'Practice19';
   data: any[] = [];
+  data2:any[]=[];
+  data3:any[]=[];
   myObserver = new Observable((observer) => {
     setTimeout(() => {
       observer.next(1);
@@ -35,6 +37,25 @@ export class AppComponent {
     }, 6000);
 });
 
+//Using of and For Operrator
+//Of Operator creates an observable from the arguments we pass to it which is emited
+//After all the values it Emits the complete 
+
+//Note the Array values will be printed as it is it will be not iterated 
+
+myObserver2=of([1,2,3,4,5],[5,6,7,8],true,34,2222);
+
+//To iterate over the arrays we need another operator called from Operator which take one argument which iterates and emits
+//We can us From Operator to convert a promise to an Observables
+
+myObserver3=from([5,6,6,7])
+//Promise Data is a promise It will be converted to Observable using from 
+promiseData= new Promise((resolve,reject)=>{
+resolve([20,30,40,50]);
+})
+
+myObserver4=from(this.promiseData);
+
 getdata() {
   //First Call back if for Next,Second Call back is for Error and third for Complete
 //   this.myObserver.subscribe((val: any) => {
@@ -58,6 +79,27 @@ this.myObserver.subscribe({
     alert('Completed');
   }
 })
-
+this.myObserver2.subscribe({
+  next:(val: any)=>{
+    this.data2.push(val);   
+  },
+  error(err: any){
+    alert(err.message)
+  },
+  complete(){
+    alert('Completed');
+  }
+})
+this.myObserver4.subscribe({
+  next:(val: any)=>{
+    this.data2.push(val);   
+  },
+  error(err: any){
+    alert(err.message)
+  },
+  complete(){
+    alert('Completed');
+  }
+})
 }
 }
