@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
+import { SignalPracticeComponent } from './signal-practice/signal-practice.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule],
+  imports: [CommonModule,SignalPracticeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
